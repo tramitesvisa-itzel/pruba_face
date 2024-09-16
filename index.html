@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+        /* Estilo para el mensaje */
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- SDK de Facebook para JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v20.0&appId=1031833078265476" nonce="2KbmZT6D"></script>
+
+    <h1>¡Síguenos en Facebook!</h1>
+    
+    <!-- Botón de "Me gusta" -->
+    <div class="fb-like" 
+         data-href="https://www.facebook.com/profile.php?id=61561523894253" 
+         data-width="" 
+         data-layout="standard"  
+         data-action="like" 
+         data-size="large" 
+         data-share="true">
+    </div>
+
+    <!-- Mensaje de estado -->
+    <div id="status"></div>
+
+    <script>
+        // Iniciamos el SDK y añadimos un listener para el botón de Me Gusta
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1031833078265476',
+                xfbml      : true,
+                version    : 'v20.0'
+            });
+
+            // Escucha el evento "edge.create" (cuando alguien da "Me gusta")
+            FB.Event.subscribe('edge.create', function(response) {
+                document.getElementById('status').innerText = '¡Gracias por darle Me gusta a nuestra página!';
+            });
+
+            // Escucha el evento "edge.remove" (cuando alguien quita el "Me gusta")
+            FB.Event.subscribe('edge.remove', function(response) {
+                document.getElementById('status').innerText = 'Has quitado el Me gusta de nuestra página.';
+            });
+        };
+    </script>
+
+</body>
+</html>
